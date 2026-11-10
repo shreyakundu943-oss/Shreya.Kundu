@@ -7,3 +7,5 @@ Hello! My name is Shreya Kundu. I am currently studying Btech in Computer Scienc
 Learning Python,C
 # Interest
 Interested in web development
+# Goals
+Build my own software project
