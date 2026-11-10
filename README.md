@@ -9,3 +9,8 @@ Learning Python,C
 Interested in web development
 # Goals
 Build my own software project
+
+## Projects
+
+- Student Management System: A project to manage student records, details and academic information.
+- Portfolio Website: A personal website to showcase my skills and projects.
