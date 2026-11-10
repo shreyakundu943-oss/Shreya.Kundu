@@ -1,23 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My GitHub Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A student developer portfolio showcasing skills, projects and learning." />
+  <title>My Portfolio | Student Developer</title>
+  <style>
+    :root {
+      --ink: #20213a;
+      --muted: #666783;
+      --purple: #7657e8;
+      --pink: #ee83b5;
+      --blue: #79b8f2;
+      --paper: #fbfaff;
+      --card: rgba(255,255,255,.82);
+      --line: #ece8fa;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 8% 8%, #f2eaff 0, transparent 28rem),
+        radial-gradient(circle at 95% 24%, #e8f5ff 0, transparent 30rem),
+        var(--paper);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1080px, calc(100% - 40px)); margin: auto; }
+    header { padding: 24px 0; }
+    nav { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { font-weight: 800; letter-spacing: -.5px; font-size: 1.15rem; }
+    .brand span { color: var(--purple); }
+    .navlinks { display:flex; gap:24px; color:var(--muted); font-size:.94rem; }
+    .navlinks a:hover { color:var(--purple); }
+    .hero {
+      min-height: 570px; display:grid; grid-template-columns: 1.2fr .8fr;
+      align-items:center; gap:50px; padding:70px 0 90px;
+    }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:9px; padding:8px 14px;
+      border:1px solid #e8defe; border-radius:999px; color:#684bd0;
+      background:#fff; font-size:.85rem; font-weight:650;
+    }
+    .dot { width:8px; height:8px; border-radius:50%; background:#54c69a; box-shadow:0 0 0 4px #e5f8f0; }
+    h1 { font-size:clamp(2.7rem, 6vw, 4.8rem); line-height:1.06; letter-spacing:-2.8px; margin:22px 0 18px; }
+    h1 .gradient { background:linear-gradient(100deg,var(--purple),#b45fca,var(--pink)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .intro { max-width:590px; color:var(--muted); font-size:1.1rem; }
+    .buttons { display:flex; flex-wrap:wrap; gap:13px; margin-top:30px; }
+    .btn { padding:12px 20px; border-radius:13px; font-weight:700; display:inline-flex; align-items:center; gap:8px; transition:.2s; }
+    .btn.primary { color:white; background:linear-gradient(110deg,var(--purple),#9873ed); box-shadow:0 10px 24px #7657e833; }
+    .btn.secondary { background:white; border:1px solid var(--line); }
+    .btn:hover { transform:translateY(-3px); }
+    .visual { position:relative; display:grid; place-items:center; min-height:340px; }
+    .orb { width:min(310px,75vw); aspect-ratio:1; border-radius:38% 62% 58% 42% / 42% 40% 60% 58%; background:linear-gradient(145deg,#d9ccff,#f7cce5 55%,#c8e9ff); box-shadow:inset -18px -18px 45px #ffffff80, 0 25px 70px #8d72c52b; transform:rotate(-8deg); }
+    .code-card { position:absolute; width:260px; padding:20px; border:1px solid #ffffff; border-radius:18px; background:#ffffffdf; box-shadow:0 20px 55px #51417c24; backdrop-filter:blur(12px); transform:rotate(4deg); }
+    .dots { display:flex; gap:6px; margin-bottom:18px; }
+    .dots i { width:8px; height:8px; border-radius:50%; background:#f39ab9; }
+    .dots i:nth-child(2){background:#f4ca78}.dots i:nth-child(3){background:#78cfae}
+    .code-line { height:8px; border-radius:10px; margin:11px 0; background:#e9e5f6; }
+    .code-line.purple { width:72%; background:#b7a4f5; }
+    .code-line.blue { width:88%; background:#a9d2f5; }
+    .code-line.pink { width:55%; background:#f2b4d1; }
+    section { padding:68px 0; }
+    .section-head { margin-bottom:28px; }
+    .kicker { color:var(--purple); text-transform:uppercase; letter-spacing:2px; font-size:.75rem; font-weight:800; }
+    h2 { font-size:clamp(1.9rem,4vw,2.6rem); letter-spacing:-1px; margin:6px 0; }
+    .section-sub { color:var(--muted); margin:0; }
+    .about-card, .project, .skill, .contact-card {
+      background:var(--card); border:1px solid var(--line); border-radius:20px;
+      box-shadow:0 12px 35px #46347b08;
+    }
+    .about-card { padding:28px 30px; color:var(--muted); }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .skill { padding:22px; }
+    .icon { width:42px; height:42px; display:grid; place-items:center; border-radius:13px; background:#f0eaff; color:var(--purple); font-size:1.2rem; margin-bottom:14px; }
+    .skill h3, .project h3 { margin:0 0 6px; }
+    .skill p, .project p { color:var(--muted); margin:0; font-size:.94rem; }
+    .project { padding:24px; display:flex; flex-direction:column; min-height:210px; }
+    .tag { display:inline-block; width:max-content; margin-top:18px; padding:5px 10px; border-radius:999px; background:#f1edff; color:#694fd0; font-size:.78rem; font-weight:700; }
+    .contact-card { padding:30px; display:flex; justify-content:space-between; align-items:center; gap:25px; }
+    .contact-card p { color:var(--muted); margin:5px 0 0; }
+    footer { padding:28px 0 38px; text-align:center; color:#85839c; font-size:.88rem; }
+    @media (max-width:760px) {
+      .navlinks { gap:13px; font-size:.82rem; }
+      .hero { grid-template-columns:1fr; padding:55px 0 35px; gap:20px; }
+      .visual { min-height:300px; }
+      .grid { grid-template-columns:1fr; }
+      .contact-card { align-items:flex-start; flex-direction:column; }
+    }
+    @media (max-width:430px) {
+      .wrap { width:min(100% - 28px,1080px); }
+      nav { align-items:flex-start; flex-direction:column; }
+      .navlinks { flex-wrap:wrap; }
+      h1 { letter-spacing:-1.7px; }
+    }
+  </style>
 </head>
 <body>
+  <header class="wrap">
+    <nav>
+      <a class="brand" href="#home">my<span>portfolio.</span></a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
 
-    <h1>Welcome to My Portfolio</h1>
+  <main>
+    <section class="wrap hero" id="home">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Student · Aspiring Developer</div>
+        <h1>Hi, I'm a <span class="gradient">student developer.</span></h1>
+        <p class="intro">Welcome to my little corner of the internet! I'm learning to turn ideas into useful projects, exploring new technologies and building my skills one line of code at a time.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#projects">Explore my work <span>↗</span></a>
+          <a class="btn secondary" href="#about">A little about me</a>
+        </div>
+      </div>
+      <div class="visual" aria-label="Decorative code illustration">
+        <div class="orb"></div>
+        <div class="code-card">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="code-line purple"></div>
+          <div class="code-line blue"></div>
+          <div class="code-line pink"></div>
+          <div class="code-line blue" style="width:64%"></div>
+          <div class="code-line purple" style="width:82%"></div>
+        </div>
+      </div>
+    </section>
 
-    <h2>About Me</h2>
-    <p>Hello! I am a Computer Science student learning programming and software development.</p>
+    <section class="wrap" id="about">
+      <div class="section-head"><div class="kicker">Get to know me</div><h2>About me</h2><p class="section-sub">A curious mind with a passion for learning.</p></div>
+      <div class="about-card">
+        I'm currently studying <strong>[Your course / branch]</strong> and developing my foundation in programming and software development. This portfolio is where I'll document what I'm learning, share projects I'm working on and track my progress as I grow as a developer.
+      </div>
+    </section>
 
-    <h2>My Skills</h2>
-    <p>Learning Python and web development.</p>
+    <section class="wrap" id="skills">
+      <div class="section-head"><div class="kicker">What I'm learning</div><h2>My skills</h2><p class="section-sub">Technologies and tools I'm exploring.</p></div>
+      <div class="grid">
+        <article class="skill"><div class="icon">⌘</div><h3>Programming</h3><p>Building problem-solving skills with C/C++ and Python.</p></article>
+        <article class="skill"><div class="icon">✦</div><h3>Web basics</h3><p>Exploring HTML, CSS and the fundamentals of creating websites.</p></article>
+        <article class="skill"><div class="icon">⑂</div><h3>Developer tools</h3><p>Practising Git, GitHub and VS Code as part of my workflow.</p></article>
+      </div>
+    </section>
 
-    <h2>My Projects</h2>
-    <ul>
-        <li>Student Management System</li>
-        <li>Portfolio Website</li>
-    </ul>
+    <section class="wrap" id="projects">
+      <div class="section-head"><div class="kicker">Things I've worked on</div><h2>Featured projects</h2><p class="section-sub">A few ideas and projects from my learning journey.</p></div>
+      <div class="grid">
+        <article class="project"><div class="icon">▤</div><h3>Student Management System</h3><p>A project idea for organising student details, records and academic information.</p><span class="tag">C / C++ · Learning project</span></article>
+        <article class="project"><div class="icon">⌘</div><h3>My Developer Portfolio</h3><p>A personal website to introduce myself and showcase my skills and projects.</p><span class="tag">HTML · CSS</span></article>
+        <article class="project"><div class="icon">✧</div><h3>More coming soon</h3><p>I'm continuously learning and looking forward to adding more projects here.</p><span class="tag">In progress</span></article>
+      </div>
+    </section>
 
+    <section class="wrap" id="contact">
+      <div class="contact-card">
+        <div><div class="kicker">Let's connect</div><h2>Have a project idea?</h2><p>I'd love to learn, collaborate and connect with other curious developers.</p></div>
+        <a class="btn primary" href="https://github.com/shreyakundu943-oss" target="_blank" rel="noopener noreferrer">Visit my GitHub ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">Made with curiosity, creativity & a little bit of code. © 2026</footer>
 </body>
 </html>
